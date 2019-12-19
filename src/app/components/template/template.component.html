@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row" [ngClass]="{ 'has-danger': apellido.errors?.required && apellido.touched}">
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
 
@@ -39,7 +39,8 @@
                [(ngModel)]="usuario.apellido"
                required
                #apellido="ngModel">
-        <div *ngIf="apellido.errors?.required">
+        <div *ngIf="apellido.errors?.required"
+              class="form-control-feedback">
            Este campo es requerido
         </div>
       </div>
@@ -47,7 +48,7 @@
 
   </div>
 
-  <div class="form-group row">
+  <div class="form-group row" [ngClass]="{ 'has-danger': correo.errors?.required && correo.touched}">
     <label class="col-2 col-form-label">Correo</label>
     <div class="col-md-8">
 
@@ -60,13 +61,71 @@
              #correo="ngModel"
              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
 
-             <div *ngIf="correo.errors?.required">
+             <div *ngIf="correo.errors?.required"
+                   class="form-control-feedback">
               Este campo es requerido
              </div>
-             <div *ngIf="correo.errors?.pattern">
+             <div *ngIf="correo.errors?.pattern"
+                  class="form-control-feedback">
               El correo no tiene el formato correcto
              </div>
     </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">País</label>
+    <div class="col-md-8">
+      <select [(ngModel)]="usuario.pais"
+              class="form-control" 
+              name="pais">
+              <option value="">Seleccione un país</option>
+              <option *ngFor="let pais of paises" [value]="pais.codigo">{{pais.nombre}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Sexo</label>
+    <div class="col-md-8">
+
+      <label  *ngFor="let s of sexos"
+              class="custom-control custom-radio">
+        <input [(ngModel)]="usuario.sexo"
+              name="sexo" 
+              type="radio" 
+              [value]="s"
+              class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">{{s}}</span>
+      </label>
+
+      <!--
+      <label class="custom-control custom-radio">
+        <input [(ngModel)]="usuario.sexo"
+              name="sexo" 
+              type="radio" 
+              value="Mujer"
+              class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Mujer</span>
+      </label>
+      -->
+    </div>
+  </div>
+
+  <div class="form-group row">
+        <label class="col-2 col-form-label">Sexo</label>
+        <div class="col-md-8">
+
+          <label class="custom-control custom-checkbox">
+            <input [(ngModel)]="usuario.acepta"
+                  type="checkbox" 
+                  class="custom-control-input"
+                  required>
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Acepta las condiciones</span>
+          </label>
+        </div>
   </div>
 
 
@@ -74,6 +133,7 @@
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
+     <!-- [disabled]="!forma.valid"-->
       <button [disabled]="!forma.valid"
           type="submit" 
           class="btn btn-outline-primary">
@@ -83,3 +143,7 @@
   </div>
 
 </form>
+
+<pre>
+  {{usuario | json}}
+</pre>
