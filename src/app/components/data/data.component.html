@@ -3,9 +3,9 @@
 <form [formGroup]="forma" (ngSubmit)="guardarCambios()"
       novalidate="novalidate">
 
-  <div>
+  <div formGroupName="nombrecompleto">
 
-    <div class="form-group row" [ngClass]="{'has-danger': !forma.get('nombre').valid}">
+    <div class="form-group row" [ngClass]="{'has-danger': !forma.controls['nombrecompleto'].controls['nombre'].valid}">
       <label class="col-2 col-form-label">Nombre</label>
       <div class="col-8">
 
@@ -13,18 +13,18 @@
                type="text"
                placeholder="Nombre"
                formControlName="nombre">
-               <div *ngIf="forma.controls['nombre'].errors?.required"
+               <div *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.required"
                     class="form-control-feedback">
                     El nombre es necesario.
                 </div>
-                <div *ngIf="forma.controls['nombre'].errors?.minlength"
+                <div *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.minlength"
                     class="form-control-feedback">
                     El nombre debe tener al menos 3 carácteres.
                 </div>
       </div>
     </div>
 
-    <div class="form-group row" [ngClass]="{'has-danger': !forma.get('apellido').valid}">
+    <div class="form-group row" [ngClass]="{'has-danger': !forma.controls['nombrecompleto'].controls['apellido'].valid}">
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
 
@@ -32,7 +32,7 @@
                type="text"
                placeholder="Apellido"
                formControlName="apellido">
-               <div *ngIf="forma.controls['apellido'].errors?.required"
+               <div *ngIf="forma.controls['nombrecompleto'].controls['apellido'].errors?.required"
                     class="form-control-feedback">
                     El apellido es necesario.
                 </div>
