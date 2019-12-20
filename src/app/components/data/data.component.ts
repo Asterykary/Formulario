@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 
+
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
