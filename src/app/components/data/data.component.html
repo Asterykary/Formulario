@@ -5,7 +5,7 @@
 
   <div>
 
-    <div class="form-group row">
+    <div class="form-group row" [ngClass]="{'has-danger': !forma.get('nombre').valid}">
       <label class="col-2 col-form-label">Nombre</label>
       <div class="col-8">
 
@@ -13,10 +13,18 @@
                type="text"
                placeholder="Nombre"
                formControlName="nombre">
+               <div *ngIf="forma.controls['nombre'].errors?.required"
+                    class="form-control-feedback">
+                    El nombre es necesario.
+                </div>
+                <div *ngIf="forma.controls['nombre'].errors?.minlength"
+                    class="form-control-feedback">
+                    El nombre debe tener al menos 3 carácteres.
+                </div>
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row" [ngClass]="{'has-danger': !forma.get('apellido').valid}">
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
 
@@ -24,12 +32,16 @@
                type="text"
                placeholder="Apellido"
                formControlName="apellido">
+               <div *ngIf="forma.controls['apellido'].errors?.required"
+                    class="form-control-feedback">
+                    El apellido es necesario.
+                </div>
       </div>
     </div>
 
   </div>
 
-  <div class="form-group row">
+  <div class="form-group row" [ngClass]="{'has-danger': !forma.get('correo').valid}">
     <label class="col-2 col-form-label">Correo</label>
     <div class="col-md-8">
 
@@ -37,6 +49,14 @@
              type="email"
              placeholder="Correo electrónico"
              formControlName="correo">
+             <div *ngIf="forma.controls['correo'].errors?.required"
+                    class="form-control-feedback">
+                    El correo es necesario.
+              </div>
+              <div *ngIf="forma.controls['correo'].errors?.pattern"
+                    class="form-control-feedback">
+                    El correo no tiene el formato correcto.
+              </div>
     </div>
   </div>
 
